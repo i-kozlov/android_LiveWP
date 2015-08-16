@@ -4,11 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.baybaka.lievwp.android.controller.World;
+import com.baybaka.lievwp.android.model.BaseParticle;
 
 public class Renderer {
 
@@ -73,10 +73,10 @@ public class Renderer {
 
         batch2.begin();
 
-        Texture txt = new Texture("bob/bob_02.png");
-        Sprite sprite = new Sprite(txt, -x, -y, 150, 150);
+//        Texture txt = new Texture("bob/bob_02.png");
+//        Sprite sprite = new Sprite(txt, -x, -y, 150, 150);
 //        sprite.setColor(Color.WHITE);
-        sprite.draw(batch2);
+//        sprite.draw(batch2);
 
 //        Pixmap p = new Pixmap(256, 256, Pixmap.Format.RGBA8888);
 
@@ -86,8 +86,15 @@ public class Renderer {
 
 //        pe.draw(batch, delta);
 
+        for (BaseParticle particle: mWorld.getParticles()) {
+            ParticleEffect effect = particle.getPe();
+            effect.setPosition(particle.getPosition().x, particle.getPosition().y);
+            effect.draw(batch2, delta);
+        }
+
         pe.setPosition(-x, y);
         pe.draw(batch2, delta);
+
         batch2.end();
 
 

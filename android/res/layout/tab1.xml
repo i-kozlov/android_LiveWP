@@ -19,6 +19,7 @@
             android:text="max q-ty of particles"/>
 
         <EditText
+            android:id="@+id/value"
             style="@style/editTextWithBorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -3,23 +3,38 @@ package com.baybaka.lievwp.android.controller;
 import android.util.Log;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
+import com.baybaka.lievwp.android.helper.Helper;
 import com.baybaka.lievwp.android.model.BaseParticle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class World {
-    private float runTime;
+    private float runTime = 0;
+    private float lastUpdate = 0;
+    private int secondsToUpdate = 2;
+
     private int maxCount = 3;
+    private Helper mHelper;
+
+    public World() {
+        mHelper = new Helper(this);
+    }
+
+    public void setMaxCount(int maxCount) {
+        this.maxCount = maxCount;
+    }
+
+    public List<BaseParticle> getParticles() {
+        return mParticles;
+    }
+
     private List<BaseParticle> mParticles = new ArrayList<BaseParticle>();
 
     public void update(float delta) {
 
-        ifNewSecond(delta);
-
         runTime += delta;
+
 //        Gdx.app.log("GameScreen FPS", (1/delta) + "");
         if (Gdx.input.isTouched()) {
             Log.i("log", "touched");
@@ -30,22 +45,28 @@ public class World {
 
             Log.i("acc", String.valueOf(x));
         }
-
+        // add acceleration
+        doAction(delta);
     }
 
-    private void ifNewSecond(float delta) {
-        if (((runTime + delta) /1000 - runTime/ 1000) == 1) {
-            if (mParticles.size() > maxCount) {
-                mParticles.add(createNewParticle());
+    private void doAction(float delta) {
+        for (BaseParticle p : new ArrayList<>(mParticles)) {
+            p.passedTime(delta);
+            p.move(delta);
+            if (! p.isAlive()) {
+                p.die();
+                mParticles.remove(p);
+            }
+        }
+
+        if ((runTime - lastUpdate)  > secondsToUpdate) {
+            lastUpdate = runTime;
+
+            if (mParticles.size() < maxCount) {
+                mParticles.add(mHelper.createNewParticle());
             }
         }
     }
 
-    private BaseParticle createNewParticle() {
-        Random random = new Random();
-        float speed = random.nextFloat(); // *(maxX - minX) + minX;
-        Vector2 velocity = new Vector2(speed, 0);
-        velocity.rotate(random.nextFloat() * 360);
-        return null;
-    }
+
 }

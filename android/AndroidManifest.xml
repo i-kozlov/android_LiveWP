@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.baybaka.lievwp.android"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="22" />
+
+    <uses-feature
+        android:name="android.software.live_wallpaper"
+        android:required="true" >
+    </uses-feature>
+
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+
+    <application
+        android:name=".MyApp"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Holo.Light" >
+        <service
+            android:name=".service.LiveWallpaperAndroid"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_WALLPAPER" >
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/livewallpaper" />
+        </service>
+
+        <activity
+            android:name=".config.ConfigActivity"
+            android:label="@string/title_activity_config"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".AndroidLauncher"/>
+    </application>
+
+</manifest>
