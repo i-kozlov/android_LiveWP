@@ -8,7 +8,7 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.backends.android.AndroidLiveWallpaperService;
 import com.badlogic.gdx.backends.android.AndroidWallpaperListener;
 import com.baybaka.lievwp.android.screen.LiveWallpaperScreen;
-import com.baybaka.lievwp.android.LiveWallpaperStarter;
+import com.baybaka.lievwp.android.utils.LiveWallpaperStarter;
 
 public class LiveWallpaperAndroid extends AndroidLiveWallpaperService { 
 	

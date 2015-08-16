@@ -2,7 +2,7 @@ package com.baybaka.lievwp.android.model;
 
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class  AbstractParticle {
+public abstract class BaseParticle {
 
     protected Vector2 position;
     protected Vector2 velocity;
@@ -29,6 +29,7 @@ public abstract class  AbstractParticle {
     public void accelerate(float x , float y) {
         Vector2 copy = new Vector2(acceleration);
         acceleration.add(x, y);
+
 
         if (acceleration.len() > maxAcceleration) {
             acceleration = copy;

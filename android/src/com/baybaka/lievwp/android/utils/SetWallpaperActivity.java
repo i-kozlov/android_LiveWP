@@ -1,4 +1,4 @@
-package com.baybaka.lievwp.android;
+package com.baybaka.lievwp.android.utils;
 
 
 import android.app.Activity;
@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.baybaka.lievwp.android.R;
 import com.baybaka.lievwp.android.service.LiveWallpaperAndroid;
 
 public class SetWallpaperActivity extends Activity {

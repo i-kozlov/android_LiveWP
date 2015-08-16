@@ -4,12 +4,12 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.baybaka.lievwp.android.view.World;
+import com.baybaka.lievwp.android.controller.World;
 import com.baybaka.lievwp.android.view.Renderer;
 
 public class LiveWallpaperScreen implements Screen {
     Game game;
-    private float runTime;
+
 
     World world;
     Renderer renderer;
@@ -23,7 +23,7 @@ public class LiveWallpaperScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        runTime += delta;
+
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

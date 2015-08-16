@@ -1,4 +1,4 @@
-package com.baybaka.lievwp.android;
+package com.baybaka.lievwp.android.utils;
 
 import com.badlogic.gdx.Game;
 import com.baybaka.lievwp.android.screen.LiveWallpaperScreen;
