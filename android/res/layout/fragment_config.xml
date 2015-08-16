@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    style="@android:style/Theme.Holo.Light"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    style="@android:style/Theme.Holo.Light"
     android:orientation="vertical">
 
     <TextView
-        android:padding="10dp"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:text="Wallpaper settings"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:text="Wallpaper settings"
+        android:textSize="26sp"
+        android:textStyle="bold"/>
 
     <TabHost
+        android:id="@+id/tabHost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tabHost"
         android:layout_gravity="center_horizontal">
 
         <LinearLayout
@@ -38,12 +38,22 @@
                 android:layout_height="match_parent">
 
 
-                <include
-                    layout="@layout/tab1" />
+                <LinearLayout
+                    android:id="@+id/tab1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <include
+                        layout="@layout/tab1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+                </LinearLayout>
 
 
                 <include
-                    layout="@layout/tab2" />
+                    layout="@layout/tab2"/>
 
 
             </FrameLayout>

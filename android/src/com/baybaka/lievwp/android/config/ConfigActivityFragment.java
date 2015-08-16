@@ -21,6 +21,12 @@ public class ConfigActivityFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -31,7 +37,6 @@ public class ConfigActivityFragment extends Fragment {
         tabs.setup();
 
         TabHost.TabSpec spec = tabs.newTabSpec("tag1");
-
         spec.setContent(R.id.tab1);
         spec.setIndicator("Particle setup");
         tabs.addTab(spec);

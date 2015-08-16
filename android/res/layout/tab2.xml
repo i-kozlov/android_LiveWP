@@ -1,22 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/tab2"
-              android:orientation="vertical"
-              android:padding="10dp"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<LinearLayout
+    android:id="@+id/tab2"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <LinearLayout
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+
+        <TextView
+            style="@style/optionName"
+            android:layout_marginTop="10dp"
+            android:text="Particle speed interval"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/speed_min"
+                style="@style/editTextWithBorder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginRight="32dp"
+                android:hint="@string/min_val_hint"/>
+
+            <EditText
+                android:id="@+id/speed_max"
+                style="@style/editTextWithBorder"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:hint="@string/max_val_hint"/>
+        </LinearLayout>
+
+
+        <TextView
+            style="@style/optionName"
+            android:text="Particle size interval (px)"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/size_min"
+                style="@style/editTextWithBorder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginRight="32dp"
+                android:hint="@string/min_val_hint"/>
+
+            <EditText
+                android:id="@+id/size_max"
+                style="@style/editTextWithBorder"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:hint="@string/max_val_hint"/>
+        </LinearLayout>
+
+
+        <TextView
+            style="@style/optionName"
+            android:text="Particle acceleration value"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/acceleration_min"
+                style="@style/editTextWithBorder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginRight="32dp"
+                android:hint="@string/min_val_hint"/>
+
+            <EditText
+                android:id="@+id/acceleration_max"
+                style="@style/editTextWithBorder"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:hint="@string/max_val_hint"/>
+        </LinearLayout>
+
+
+        <TextView
+            style="@style/optionName"
+            android:text="Particle life time"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/lifetime_min"
+                style="@style/editTextWithBorder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginRight="32dp"
+                android:hint="@string/min_val_hint"/>
+
+            <EditText
+                android:id="@+id/lifetime_max"
+                style="@style/editTextWithBorder"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:hint="@string/max_val_hint"/>
+        </LinearLayout>
 
     </LinearLayout>
 
     <Button
-        android:text="@string/apply"
         android:id="@+id/apply"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="@string/apply"/>
 
 </LinearLayout>
