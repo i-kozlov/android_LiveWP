@@ -14,7 +14,6 @@ public class ParticleLinearDirection extends BaseParticle {
 
         velocity.add(acceleration.cpy().scl(delta));
 
-
         position.add(velocity.cpy().scl(delta));
     }
 }

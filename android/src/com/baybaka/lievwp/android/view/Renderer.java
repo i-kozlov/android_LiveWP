@@ -135,4 +135,8 @@ public class Renderer {
 
     }
 
+    public void dispose() {
+        batch.dispose();
+        batch2.dispose();
+    }
 }

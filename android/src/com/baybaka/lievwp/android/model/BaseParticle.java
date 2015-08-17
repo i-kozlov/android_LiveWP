@@ -23,7 +23,7 @@ public abstract class BaseParticle {
 
     ParticleEffect pe;
 
-    public void passedTime(float delta) {
+    public void incPassedTime(float delta) {
         runTime+= delta;
     }
 

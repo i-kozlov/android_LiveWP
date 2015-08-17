@@ -7,6 +7,7 @@ import com.baybaka.lievwp.android.helper.Helper;
 import com.baybaka.lievwp.android.model.BaseParticle;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class World {
@@ -50,22 +51,35 @@ public class World {
     }
 
     private void doAction(float delta) {
-        for (BaseParticle p : new ArrayList<>(mParticles)) {
-            p.passedTime(delta);
+
+        for (Iterator<BaseParticle> iterator = mParticles.iterator(); iterator.hasNext();) {
+            BaseParticle p = iterator.next();
+
+            p.incPassedTime(delta);
             p.move(delta);
-            if (! p.isAlive()) {
-                p.die();
-                mParticles.remove(p);
+
+            if (needToRemove(p)) {
+                iterator.remove();
             }
         }
 
-        if ((runTime - lastUpdate)  > secondsToUpdate) {
+        if ((runTime - lastUpdate) > secondsToUpdate) {
             lastUpdate = runTime;
 
             if (mParticles.size() < maxCount) {
                 mParticles.add(mHelper.createNewParticle());
             }
         }
+    }
+
+    private boolean needToRemove(BaseParticle p) {
+        if (!p.isAlive()) {
+            p.die();
+
+            return true;
+        }
+
+        return false;
     }
 
 

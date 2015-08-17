@@ -36,6 +36,7 @@ public class LiveWallpaperScreen implements Screen {
     @Override
     public void dispose() {
         Gdx.app.log("LiveWallpaperScreen", "dispose called");
+        renderer.dispose();
 
     }
 
