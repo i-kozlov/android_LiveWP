@@ -8,27 +8,33 @@
     android:padding="10dp">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_weight="1">
 
-        <TextView
-            android:layout_marginTop="10dp"
-            style="@style/optionName"
-            android:text="max q-ty of particles"/>
-
-        <EditText
-            android:id="@+id/value"
-            style="@style/editTextWithBorder"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Value input field"
-            />
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/optionName"
+                android:layout_marginTop="10dp"
+                android:text="max q-ty of particles"/>
+
+            <EditText
+                android:id="@+id/value"
+                style="@style/editTextWithBorder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Value input field"
+                />
+        </LinearLayout>
     </LinearLayout>
 
     <Button
-
+        android:layout_gravity="bottom"
         android:id="@+id/apply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

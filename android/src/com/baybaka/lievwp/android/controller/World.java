@@ -1,8 +1,7 @@
 package com.baybaka.lievwp.android.controller;
 
-import android.util.Log;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.baybaka.lievwp.android.helper.Helper;
 import com.baybaka.lievwp.android.model.BaseParticle;
 
@@ -13,10 +12,15 @@ import java.util.List;
 public class World {
     private float runTime = 0;
     private float lastUpdate = 0;
-    private int secondsToUpdate = 2;
+    private int createNewTimeOut = 1;
+
+    private float lastUpdateForAccelerometer = 0;
+    private final float ACCELEROMETER_THRESHOLD = 0.3f;
 
     private int maxCount = 3;
     private Helper mHelper;
+    private int maxWidth;
+    private int maxHeight;
 
     public World() {
         mHelper = new Helper(this);
@@ -36,26 +40,27 @@ public class World {
 
         runTime += delta;
 
-//        Gdx.app.log("GameScreen FPS", (1/delta) + "");
-        if (Gdx.input.isTouched()) {
-            Log.i("log", "touched");
-        }
+        Vector2 accelerometer = null;
 
-        float x = Gdx.input.getAccelerometerX();
-        if (Math.abs(x) > 1) {
+        if (runTime - lastUpdateForAccelerometer > ACCELEROMETER_THRESHOLD) {
 
-            Log.i("acc", String.valueOf(x));
+            lastUpdateForAccelerometer = runTime;
+            float x = Gdx.input.getAccelerometerX();
+            float y = Gdx.input.getAccelerometerY();
+            accelerometer = new Vector2(-x, -y);
         }
-        // add acceleration
-        doAction(delta);
+        doAction(delta, accelerometer);
     }
 
-    private void doAction(float delta) {
+    private void doAction(float delta, Vector2 accelerometer) {
 
-        for (Iterator<BaseParticle> iterator = mParticles.iterator(); iterator.hasNext();) {
+        for (Iterator<BaseParticle> iterator = mParticles.iterator(); iterator.hasNext(); ) {
             BaseParticle p = iterator.next();
 
             p.incPassedTime(delta);
+            if (accelerometer != null) {
+                p.addAccelelometerVectorToVelocity(accelerometer);
+            }
             p.move(delta);
 
             if (needToRemove(p)) {
@@ -63,7 +68,7 @@ public class World {
             }
         }
 
-        if ((runTime - lastUpdate) > secondsToUpdate) {
+        if ((runTime - lastUpdate) > createNewTimeOut) {
             lastUpdate = runTime;
 
             if (mParticles.size() < maxCount) {
@@ -73,7 +78,7 @@ public class World {
     }
 
     private boolean needToRemove(BaseParticle p) {
-        if (!p.isAlive()) {
+        if (!p.isAlive() || leftScreen(p)) {
             p.die();
 
             return true;
@@ -82,5 +87,14 @@ public class World {
         return false;
     }
 
+    private boolean leftScreen(BaseParticle p) {
+        return Math.abs(p.getPosition().x) > maxWidth || Math.abs(p.getPosition().y) > maxHeight;
+    }
 
+
+    public void setScreenLimits(int viewportWidth, int viewportHeight) {
+
+        maxWidth = viewportWidth;
+        maxHeight = viewportHeight;
+    }
 }

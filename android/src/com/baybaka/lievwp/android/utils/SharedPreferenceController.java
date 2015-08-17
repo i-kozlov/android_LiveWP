@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.baybaka.lievwp.android.MyApp;
+import java.util.List;
 
 public class SharedPreferenceController {
 
@@ -16,7 +16,7 @@ public class SharedPreferenceController {
     private static final String MIN_SIZE = "MIN_SIZE";
     private static final String MAX_SIZE = "MAX_SIZE";
 
-    private static final String MIN_ACCEL= "MIN_ACCEL";
+    private static final String MIN_ACCEL = "MIN_ACCEL";
     private static final String MAX_ACCEL = "MAX_ACCEL";
 
     private static final String MIN_LIFE_TIME = "MIN_LIFE_TIME";
@@ -43,11 +43,10 @@ public class SharedPreferenceController {
         return mPreferences.getInt(QUANTITY, 3);
     }
 
-    public void  setQuantity(int val) {
+    public void setQuantity(int val) {
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putInt(QUANTITY, val);
         editor.apply();
-        MyApp.setUpdated(true);
     }
 
     public float getMinSpeed() {
@@ -59,11 +58,11 @@ public class SharedPreferenceController {
     }
 
     public int getMinSize() {
-        return mPreferences.getInt(MIN_SIZE, 20);
+        return mPreferences.getInt(MIN_SIZE, 40);
     }
 
     public int getMaxSize() {
-        return mPreferences.getInt(MAX_SIZE, 50);
+        return mPreferences.getInt(MAX_SIZE, 70);
     }
 
     public float getMinAcceleration() {
@@ -79,7 +78,44 @@ public class SharedPreferenceController {
     }
 
     public int getMaxLifeTime() {
-        return mPreferences.getInt(MAX_LIFE_TIME, 10);
+        return mPreferences.getInt(MAX_LIFE_TIME, 30);
     }
 
+    public void updateTab2(List<Float> fieldValues) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+
+        if (fieldValues.get(0) != null) {
+            editor.putFloat(MIN_SPEED, fieldValues.get(0));
+        }
+
+        if (fieldValues.get(1) != null) {
+            editor.putFloat(MAX_SPEED, fieldValues.get(1));
+        }
+
+        if (fieldValues.get(2) != null) {
+            editor.putInt(MIN_SIZE, fieldValues.get(2).intValue());
+        }
+
+        if (fieldValues.get(3) != null) {
+            editor.putInt(MAX_SIZE, fieldValues.get(3).intValue());
+        }
+
+        if (fieldValues.get(4) != null) {
+            editor.putFloat(MIN_ACCEL, fieldValues.get(4));
+        }
+
+        if (fieldValues.get(5) != null) {
+            editor.putFloat(MAX_ACCEL, fieldValues.get(5));
+        }
+
+        if (fieldValues.get(6) != null) {
+            editor.putInt(MIN_LIFE_TIME, fieldValues.get(6).intValue());
+        }
+
+        if (fieldValues.get(7) != null) {
+            editor.putInt(MAX_LIFE_TIME, fieldValues.get(7).intValue());
+        }
+
+        editor.apply();
+    }
 }

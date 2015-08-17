@@ -10,8 +10,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TabHost;
 
+import com.baybaka.lievwp.android.MyApp;
 import com.baybaka.lievwp.android.R;
 import com.baybaka.lievwp.android.utils.SharedPreferenceController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -49,28 +53,38 @@ public class ConfigActivityFragment extends Fragment {
 
     @Bind(R.id.lifetime_max)
     EditText lifeMax;
+
+    private EditText[] tab2EditFields = new EditText[]{speedMin, speedMax, sizeMin, sizeMax, accelMin, accelMax, lifeMin, lifeMax};
     private SharedPreferenceController pref;
 
     @OnClick(R.id.apply)
-    public void saveTab1(){
-        try {
-            int quantity = Integer.parseInt(value.getText().toString());
-            pref.setQuantity(quantity);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void saveTab1() {
+        Float f = getValueFromEditText(value);
+        if (f != null) {
+            pref.setQuantity((f.intValue()));
+            MyApp.setUpdated(true);
         }
     }
 
     @OnClick(R.id.apply2)
-    public void saveTab2(){
+    public void saveTab2() {
+        List<Float> fieldValues = new ArrayList<>(tab2EditFields.length);
+        for (EditText e : tab2EditFields) {
+            fieldValues.add(getValueFromEditText(e));
+        }
+        pref.updateTab2(fieldValues);
+        MyApp.setUpdated(true);
+    }
+
+    private Float getValueFromEditText(EditText input) {
+        Float result = null;
         try {
-            int quantity = Integer.parseInt(value.getText().toString());
-            pref.setQuantity(quantity);
+            result = Float.parseFloat(input.getText().toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
     }
-
 
     public ConfigActivityFragment() {
     }
